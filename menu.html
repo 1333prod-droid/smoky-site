@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Меню — Smoky House</title>
+<meta name="description" content="Меню кальянной Smoky House: кальяны, еда, напитки, коктейли. Узнайте цены и ассортимент.">
+<meta name="keywords" content="меню Smoky House, кальяны, еда, напитки, коктейли, Харьков">
+<meta property="og:title" content="Меню — Smoky House">
+<meta property="og:description" content="Відкрийте для себе наше меню: кальяни, їжа, напої та коктейлі.">
+<meta property="og:image" content="img/hookah1.jpg">
+<meta property="og:url" content="https://smokyhouse.com/menu.html">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── Photo Cards ─────────────────────────────────────── */
+.menu-card-photo {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,220,0,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
+  min-height: 90px;
+}
+.menu-card-photo:hover {
+  border-color: rgba(255,220,0,0.4);
+  transform: translateY(-2px);
+}
+.menu-card-photo .photo-slot {
+  flex: 0 0 90px;
+  width: 90px;
+  height: 90px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.menu-card-photo .photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.menu-card-photo .photo-slot .no-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: .35;
+  font-size: 11px;
+  color: #ffdc00;
+  text-align: center;
+  padding: 8px;
+}
+.menu-card-photo .photo-slot .no-photo svg {
+  width: 28px;
+  height: 28px;
+  fill: #ffdc00;
+}
+.menu-card-photo .card-body {
+  flex: 1;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.menu-card-photo .card-body .item-info { flex: 1; }
+.menu-card-photo .item-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffdc00;
+  white-space: nowrap;
+}
+/* keep existing .menu-card style for non-photo tabs */
+</style>
+<script>
+function showTab(tabName, btn) {
+    const sections = document.querySelectorAll('.category-section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(button => button.classList.remove('active'));
+
+    document.getElementById('tab-' + tabName).classList.add('active');
+
+    if (btn) {
+        btn.classList.add('active');
+    }
+
+    // Scroll to top of menu
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Modal functionality
+function openModal(card) {
+    const modal = document.getElementById('item-modal');
+    const modalImg = modal.querySelector('.modal-img');
+    const modalName = modal.querySelector('.modal-name');
+    const modalDesc = modal.querySelector('.modal-desc');
+
+    const img = card.querySelector('img');
+    const name = card.querySelector('.item-name').textContent;
+    const desc = card.querySelector('.item-weight').textContent;
+
+    if (img) {
+        modalImg.src = img.src;
+        modalImg.style.display = 'block';
+    } else {
+        modalImg.style.display = 'none';
+    }
+
+    modalName.textContent = name;
+    modalDesc.textContent = desc;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('item-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    // Scroll to top after closing
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Add click event to cards
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.menu-card-photo');
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            openModal(this);
+        });
+    });
+
+    // No lift for tabs, keep them fully visible
+});
+</script>
+</head>
+<body>
+
+<div class="smoke-bg">
+  <div class="smoke-layer-1"></div>
+  <div class="smoke-layer-2"></div>
+</div>
+
+<div class="top-bar">
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    Назад
+  </a>
+  <div class="logo-text">SMOKY<span>HOUSE</span></div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('food', this)">🍽 Їжа</button>
+    <button class="tab-btn" onclick="showTab('sushi', this)">🍣 Суші та роли</button>
+    <button class="tab-btn" onclick="showTab('drinks', this)">☕ Напої</button>
+    <button class="tab-btn" onclick="showTab('lemonades', this)">🍋 Лимонади</button>
+    <button class="tab-btn" onclick="showTab('teas', this)">🫖 Чаї</button>
+    <button class="tab-btn" onclick="showTab('bar', this)">🥃 Бар</button>
+    <button class="tab-btn" onclick="showTab('cocktails', this)">🍹 Коктейлі</button>
+    <button class="tab-btn" onclick="showTab('hookah', this)">🪝 Кальян</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- FOOD -->
+  <div id="tab-food" class="category-section active">
+    <div class="section-title">Їжа</div>
+
+    <div class="subsection-title">Сніданки</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Шоколадні млинці з вишнею</div><div class="item-weight">215 г</div></div><div class="item-price">120</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><img src="img/Sirniki.jpg"</div></div><div class="card-body"><div class="item-info"><div class="item-name">Сирники з сезонними фруктами</div><div class="item-weight">230/30 г</div></div><div class="item-price">185</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Скрембл з куркою та овочами</div><div class="item-weight">360 г</div></div><div class="item-price">250</div></div></div>
+    </div>
+
+    <div class="subsection-title">Салати</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Грецький салат</div><div class="item-weight">320 г</div></div><div class="item-price">240</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Цезар з куркою</div><div class="item-weight">270 г</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Цезар із креветками</div><div class="item-weight">260 г</div></div><div class="item-price">295</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Теплий салат з телятини</div><div class="item-weight">260 г</div></div><div class="item-price">310</div></div></div>
+    </div>
+
+    <div class="subsection-title">Закуски / Гарніри</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Креветка темпура зі світ чілі соусом</div><div class="item-weight">150/50 г</div></div><div class="item-price">260</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Картопля по-креольськи з соусом</div><div class="item-weight">150/50 г</div></div><div class="item-price">115</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Картопля фрі з соусом</div><div class="item-weight">150/50 г</div></div><div class="item-price">115</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Картопля діппер з соусом</div><div class="item-weight">150/50 г</div></div><div class="item-price">145</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Курячі нагетси з соусом</div><div class="item-weight">200/50 г</div></div><div class="item-price">195</div></div></div>
+    </div>
+
+    <div class="subsection-title">Перші страви</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Бульйон з курки та локшиною</div><div class="item-weight">350 г</div></div><div class="item-price">130</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Рамен з куркою та яйцем</div><div class="item-weight">450 г</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Борщ з куркою</div><div class="item-weight">470 г</div></div><div class="item-price">220</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Борщ з телятиною</div><div class="item-weight">470 г</div></div><div class="item-price">220</div></div></div>
+    </div>
+
+    <div class="subsection-title">Основні страви</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Смажений рис з куркою</div><div class="item-weight">320 г</div></div><div class="item-price">240</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Смажений рис з телятиною</div><div class="item-weight">320 г</div></div><div class="item-price">260</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Смажений рис з креветками</div><div class="item-weight">320 г</div></div><div class="item-price">270</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Паста Карбонара</div><div class="item-weight">350 г</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Біфштекс з картоплею та соусом деміглас</div><div class="item-weight">490 г</div></div><div class="item-price">410</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Стейк Нью-Йорк з салатом і соусом</div><div class="item-weight">460 г</div></div><div class="item-price">580</div></div></div>
+    </div>
+
+    <div class="subsection-title">Бургери / Шаурма</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Бургер з беконом та картоплею на вибір</div><div class="item-weight">330/150 г</div></div><div class="item-price">330</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Гамбургер з картоплею та соусом</div><div class="item-weight">300/150 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Бургер з хрусткою куркою та картоплею на вибір</div><div class="item-weight">300/150 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Шаурма куряча</div><div class="item-weight">405 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Шаурма яловича</div><div class="item-weight">395 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Шаурма сирна</div><div class="item-weight">460 г</div></div><div class="item-price">310</div></div></div>
+    </div>
+
+    <div class="subsection-title">WOK</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Удон з куркою</div><div class="item-weight">300 г</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Удон з телятиною</div><div class="item-weight">300 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Удон з креветками</div><div class="item-weight">300 г</div></div><div class="item-price">310</div></div></div>
+    </div>
+
+    <div class="subsection-title">Ґункани</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Ґункан з лососем</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Ґункан з вугрем</div><div class="item-weight"></div></div><div class="item-price">120</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Ґункан з креветкою</div><div class="item-weight"></div></div><div class="item-price">105</div></div></div>
+    </div>
+
+    <div class="subsection-title">Соуси</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Соєвий</div><div class="item-weight">50 мл</div></div><div class="item-price">35</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">В асортименті</div><div class="item-weight">50 г</div></div><div class="item-price">25</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Бургер соус</div><div class="item-weight">50 г</div></div><div class="item-price">12</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Медово-гірчичний</div><div class="item-weight">50 г</div></div><div class="item-price">25</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Барбекю</div><div class="item-weight">50 г</div></div><div class="item-price">20</div></div></div>
+    </div>
+  </div>
+
+  <!-- SUSHI -->
+  <div id="tab-sushi" class="category-section">
+    <div class="section-title">Суші та ролі</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Філадельфія-лосось рол</div><div class="item-weight">270 г</div></div><div class="item-price">360</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Філадельфія-тунець рол</div><div class="item-weight">270 г</div></div><div class="item-price">370</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Філадельфія-вугор рол</div><div class="item-weight">270 г</div></div><div class="item-price">400</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Каліфорнія рол лосось</div><div class="item-weight">220 г</div></div><div class="item-price">330</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Теплий рол з лососем</div><div class="item-weight">220 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Теплий рол з креветкою</div><div class="item-weight">260 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Макі рол з лососем</div><div class="item-weight">100/50/85 г</div></div><div class="item-price">175</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Макі рол з тунцем</div><div class="item-weight">100/50/85 г</div></div><div class="item-price">175</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Суші бургер з лососем</div><div class="item-weight">260 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Суші бургер з тунцем</div><div class="item-weight">260 г</div></div><div class="item-price">310</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Суші бургер з креветками</div><div class="item-weight">260 г</div></div><div class="item-price">310</div></div></div>
+    </div>
+  </div>
+
+  <!-- DRINKS -->
+  <div id="tab-drinks" class="category-section">
+    <div class="section-title">Напої</div>
+    <div class="subsection-title">Гарячі напої</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Еспресо</div><div class="item-weight"></div></div><div class="item-price">50</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Еспресо Допіо</div><div class="item-weight"></div></div><div class="item-price">70</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Американо</div><div class="item-weight"></div></div><div class="item-price">50</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Американо з молоком</div><div class="item-weight"></div></div><div class="item-price">60</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Лате</div><div class="item-weight"></div></div><div class="item-price">80</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Капучино</div><div class="item-weight"></div></div><div class="item-price">75</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Флетвайт</div><div class="item-weight"></div></div><div class="item-price">90</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Джміль</div><div class="item-weight"></div></div><div class="item-price">110</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава Айс Лате</div><div class="item-weight"></div></div><div class="item-price">80</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава на безлактозному молоці</div><div class="item-weight">220 мл</div></div><div class="item-price">145</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава на безлактозному (250 мл)</div><div class="item-weight"></div></div><div class="item-price">170</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кава на безлактозному (340 мл)</div><div class="item-weight"></div></div><div class="item-price">180</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Чай зелений</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Чай зелений з жасміном</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Чай чорний</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Чай чорний з бергамотом</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Чай трав'яний</div><div class="item-weight"></div></div><div class="item-price">100</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Какао</div><div class="item-weight"></div></div><div class="item-price">80</div></div></div>
+    </div>
+
+    <div class="subsection-title">Соки та вода</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Вода Боржомі</div><div class="item-weight">0,5 л</div></div><div class="item-price">120</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Вода Моршинська</div><div class="item-weight">0,5 л</div></div><div class="item-price">45</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Сік в асортименті</div><div class="item-weight">0,3 л</div></div><div class="item-price">70</div></div></div>
+    </div>
+
+    <div class="subsection-title">Освіжаючі напої</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Напій Red Bull б/а</div><div class="item-weight">0,25 л</div></div><div class="item-price">85</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Напій Burn б/а</div><div class="item-weight">0,25 л</div></div><div class="item-price">75</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кока-Кола</div><div class="item-weight">0,5 л</div></div><div class="item-price">55</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кока-Кола скло</div><div class="item-weight">0,25 л</div></div><div class="item-price">60</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Фанта</div><div class="item-weight">0,5 л</div></div><div class="item-price">55</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Фанта скло</div><div class="item-weight">0,25 л</div></div><div class="item-price">60</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Спрайт</div><div class="item-weight">0,5 л</div></div><div class="item-price">55</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Холодний чай</div><div class="item-weight">0,5 л</div></div><div class="item-price">60</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Швепс скло</div><div class="item-weight">0,25 л</div></div><div class="item-price">85</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Тонік скло</div><div class="item-weight">0,2 л</div></div><div class="item-price">115</div></div></div>
+    </div>
+  </div>
+
+  <!-- LEMONADE -->
+  <div id="tab-lemonades" class="category-section">
+    <div class="section-title">Лимонади</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Ківі-базилік</div><div class="item-desc">Ківі пюре Monin, базилік, яблучний сік, вода алое, фреш лайм</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Зелене яблуко</div><div class="item-desc">Пюре Monin яблуко, сік яблуко, сироп яблуко, фреш лайм</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Грейпфрут</div><div class="item-desc">Пюре Monin грейпфрут, фреш грейпфрут, вода алое, тонік</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Кокосовий</div><div class="item-desc">Пюре Monin кокос, кокосова вода, фреш лимон, сироп маракуя, газ вода</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Груша-мигдаль</div><div class="item-desc">Пюре груша, сироп Monin мигдаль, сік ананас, фреш лайм, вода алое</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Диня-маракуя</div><div class="item-desc">Сироп дині, пюре маракуя, сироп маракуя, сік екзотик, вода алое, лимонний фреш</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Груша-виноград</div><div class="item-desc">Груша пюре Monin, сік виноград, вода алое, лимонний фреш</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чорниця-вишня</div><div class="item-desc">Чорниця пюре Monin, мʼята, сік вишневий, вода алое, лаймовий фреш</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Малина-гранат</div><div class="item-desc">Малина пюре Monin, гранатовий сік, мʼята, вода алое, лимонний фреш</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Личі</div><div class="item-desc">Лічі пюре Monin, сок екзотик, вода алое, лаймовий фреш, грейпфрутовий фреш</div><div class="item-weight">220 мл</div></div><div class="item-price">180</div></div>
+    </div>
+  </div>
+
+  <!-- TEAS -->
+  <div id="tab-teas" class="category-section">
+    <div class="section-title">Чаї</div>
+    <div class="subsection-title">Китайські чаї</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай Пуер</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай Те Гуань Інь</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай Улун Шуйсян</div></div><div class="item-price">150</div></div>
+    </div>
+
+    <div class="subsection-title">Signature Teas</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай ягідний</div><div class="item-desc">Чай з жасміном, сироп каркаде, сироп вишня, гранатовий сік, мʼята, полуниця</div><div class="item-weight">1 л</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай з кокосом</div><div class="item-desc">Пюре Monin кокос, молоко, чорний чай, сироп Бейліс</div><div class="item-weight">0,7 л</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай трав'яний із фруктами</div><div class="item-desc">Чай трав'яний, сироп ківі, сироп яблука, сік яблука, лимонний фреш, зелене яблуко</div><div class="item-weight">1 л</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Ківі лайм</div><div class="item-desc">Зелений чай, лайм, яблучний сік, цукровий сироп, ківі пюре Monin, сироп ківі, мʼята</div><div class="item-weight">0,7 л</div></div><div class="item-price">190</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Малина вишня</div><div class="item-desc">Чай чорний, малина пюре Monin, м'ята, вишневий сік, цукровий сироп</div><div class="item-weight">0,7 л</div></div><div class="item-price">190</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чорниця гранат</div><div class="item-desc">Чай чорний, чорниця пюре Monin, гранатовий сік, цукровий сироп, мʼята, апельсин</div><div class="item-weight">0,7 л</div></div><div class="item-price">190</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Чай з варення з шишок</div><div class="item-desc">Чай бергамот, варення з шишок, кленовий сироп, апельсин, розмарин</div><div class="item-weight">0,7 л</div></div><div class="item-price">190</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Марокканський чай</div><div class="item-desc">Чай зелений, бадьян, м’ята, гвоздика, барбарис, кориця</div></div><div class="item-price">100</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Полуниця-чорниця</div><div class="item-desc">Бергамот, м'ята, вишневий сік, пюре чорниці, сироп полуниці, полуниця, цукровий сироп</div><div class="item-weight">0,7 л</div></div><div class="item-price">190</div></div>
+    </div>
+  </div>
+
+  <!-- BAR -->
+  <div id="tab-bar" class="category-section">
+    <div class="section-title">Бар</div>
+    <div class="subsection-title">Вермуты та ігристі</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Вермут Cinzano Bianco</div><div class="item-desc">150 мл</div></div><div class="item-price">45</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Вермут Cinzano Rosso</div><div class="item-desc">150 мл</div></div><div class="item-price">45</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Вино ігристе Canti Cuvee Brut</div><div class="item-desc">150 мл</div></div><div class="item-price">160</div></div>
+    </div>
+
+    <div class="subsection-title">Горілка і текіла</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Горілка Koskenkorva</div><div class="item-desc">50 мл</div></div><div class="item-price">68</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Текіла Olmeca Silver</div><div class="item-desc">50 мл</div></div><div class="item-price">125</div></div>
+    </div>
+
+    <div class="subsection-title">Вина в пляшках</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Prosecco Casa Defra</div><div class="item-desc">Італія</div></div><div class="item-price">1150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Mandoro Asti</div><div class="item-desc">Італія</div></div><div class="item-price">980</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Prosecco Miol Treviso Extra Dry</div><div class="item-desc">Італія</div></div><div class="item-price">1525</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Cava Jaume Serra</div><div class="item-desc">Іспанія</div></div><div class="item-price">740</div></div>
+    </div>
+
+    <div class="subsection-title">Пиво</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Corona</div><div class="item-weight">0,33 л</div></div><div class="item-price">100</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Hoegaarden</div><div class="item-weight">0,33 л</div></div><div class="item-price">150</div></div>
+    </div>
+
+    <div class="subsection-title">Ром та бренді</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Angostura Reserva</div><div class="item-desc">50 мл</div></div><div class="item-price">100</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Angostura 5-Year-Old</div><div class="item-desc">50 мл</div></div><div class="item-price">140</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Especia Spiced Rum</div><div class="item-desc">50 мл</div></div><div class="item-price">110</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Torres Brandy</div><div class="item-desc">50 мл</div></div><div class="item-price">140</div></div>
+    </div>
+
+    <div class="subsection-title">Віскі</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Glen Grant</div><div class="item-desc">Шотландія 50 мл</div></div><div class="item-price">265</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Maker's Mark</div><div class="item-desc">Бурбон Америка 50 мл</div></div><div class="item-price">235</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Auchentoshan</div><div class="item-desc">Шотландія 50 мл</div></div><div class="item-price">250</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Tullamore D.W.E</div><div class="item-desc">Ірландія 50 мл</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Glenfiddich 12р</div><div class="item-desc">Шотландія 50 мл</div></div><div class="item-price">350</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Wild Turkey 81</div><div class="item-desc">Бурбон Америка 50 мл</div></div><div class="item-price">120</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Wild Turkey 101</div><div class="item-desc">Бурбон Америка 50 мл</div></div><div class="item-price">140</div></div>
+    </div>
+
+    <div class="subsection-title">Аперитиви та лікери</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Jägermeister</div><div class="item-desc">50 мл</div></div><div class="item-price">95</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Amaro di Angostura</div><div class="item-desc">50 мл</div></div><div class="item-price">115</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Aperol</div><div class="item-desc">50 мл</div></div><div class="item-price">75</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Campari Bitter</div><div class="item-desc">50 мл</div></div><div class="item-price">95</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">American Honey</div><div class="item-desc">50 мл</div></div><div class="item-price">135</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Jim Beam Apple</div><div class="item-desc">50 мл</div></div><div class="item-price">130</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Jim Beam Honey</div><div class="item-desc">50 мл</div></div><div class="item-price">130</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Jim Beam Peach</div><div class="item-desc">50 мл</div></div><div class="item-price">135</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Stirling Sloe</div><div class="item-desc">50 мл</div></div><div class="item-price">128</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Sereau</div><div class="item-desc">50 мл</div></div><div class="item-price">175</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Apricot Brandy</div><div class="item-desc">50 мл</div></div><div class="item-price">165</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Pamplemousse Rose</div><div class="item-desc">50 мл</div></div><div class="item-price">160</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Amaro Averna</div><div class="item-desc">50 мл</div></div><div class="item-price">110</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Cointreau</div><div class="item-desc">50 мл</div></div><div class="item-price">140</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Triple Sec</div><div class="item-desc">50 мл</div></div><div class="item-price">70</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Peach</div><div class="item-desc">50 мл</div></div><div class="item-price">60</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Crème de Cassis</div><div class="item-desc">50 мл</div></div><div class="item-price">60</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Cacao</div><div class="item-desc">50 мл</div></div><div class="item-price">150</div></div>
+    </div>
+
+    <div class="subsection-title">Вино розлив</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Pinot Noir черв. сух</div><div class="item-desc">Франція 150 мл</div></div><div class="item-price">195</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Chianti черв. сух</div><div class="item-desc">Італія 150 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Rosé d’Anjou рож. н/сол</div><div class="item-desc">Франція 150 мл</div></div><div class="item-price">180</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Pinot Grigio біл. сух</div><div class="item-desc">Італія 150 мл</div></div><div class="item-price">160</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Gewürztraminer біл. н/сол</div><div class="item-desc">Німеччина 150 мл</div></div><div class="item-price">199</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Sauvignon Blanc біл. сух</div><div class="item-desc">Нова Зеландія 150 мл</div></div><div class="item-price">260</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Canti Merlot Veneto черв. н/сол</div><div class="item-desc">Італія 150 мл</div></div><div class="item-price">150</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Landwein Rhein біл. н/сол</div><div class="item-desc">Німеччина 150 мл</div></div><div class="item-price">145</div></div>
+    </div>
+
+    <div class="subsection-title">Джин</div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="item-info"><div class="item-name">Gordon’s</div><div class="item-desc">50 мл</div></div><div class="item-price">95</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Larios Rose</div><div class="item-desc">50 мл</div></div><div class="item-price">95</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Larios Premium</div><div class="item-desc">50 мл</div></div><div class="item-price">95</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Hendricks</div><div class="item-desc">50 мл</div></div><div class="item-price">270</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Tanqueray London Dry</div><div class="item-desc">50 мл</div></div><div class="item-price">125</div></div>
+      <div class="menu-card"><div class="item-info"><div class="item-name">Tanqueray Blackcurrant</div><div class="item-desc">50 мл</div></div><div class="item-price">135</div></div>
+    </div>
+  </div>
+
+  <!-- COCKTAILS -->
+  <div id="tab-cocktails" class="category-section">
+    <div class="section-title">Коктейлі</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Midnight</div><div class="item-weight">Джин Tanqueray Blackcurrant, фреш лимона, Volare creme de cassis, цукровий сироп</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Peach Tree</div><div class="item-weight">Volare Peach лікер, Jim Beam персик, лимонний фреш, цукровий сироп</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Apple Sin</div><div class="item-weight">Jim Beam яблуко, Volare персик, сироп яблуко, пюре яблуко Monin, фреш лимон, вода алое, фом</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Gin Garden</div><div class="item-weight">Larios 12, кордіал бузини, сік яблуко, фреш лимона, огірок слайси</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Rosewood</div><div class="item-weight">Gin Rose, фреш грейпфрут, кордіал бузина, сироп мигдаль</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Bitter Blossom</div><div class="item-weight">Larios 12, лікер грейпфрут, фреш лимон, сироп бузина, фреш грейпфрут, сироп каркаде</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Caribbean Sunset</div><div class="item-weight">2 види рома, лікер абрикос, куантро, фреш гранат, фреш лайм, цукровий сироп, фом</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Dark Noir</div><div class="item-weight">Averna, сироп карамель, фреш лайм</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Basil Smash</div><div class="item-weight">Jim Beam Apple, базилік, фреш лайм, сироп лаванда, сік ананас, сироп яблуко</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Wild Bee</div><div class="item-weight">American Honey, Amaro di angostura, кордіал бузини, фреш лимона, медовий сироп Monin</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Caffmeister</div><div class="item-weight">Jägermeister, Stirling Sloe Gin, лікер Volare coffee, сироп шоколад Monin, лимонний фреш, кола зеро</div></div><div class="item-price">280</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Zero Two</div><div class="item-weight">Larios, Rose, Cointreau, фреш грейпфрут, вода алое</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Fireflower</div><div class="item-weight">Jack Daniel's Fire, Jim Beam Apple, сироп клен, лимон фреш, цукровий сироп, сік яблуко, Angostura</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Cone-Cone</div><div class="item-weight">Wild Turkey 81, Amaro Averna, сироп клен, варення з шишок, цукровий сироп, лимонний фреш, Angostura біттер</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Pinerum</div><div class="item-weight">Ром Especia, ром золотий, лікер Amaretto Volare, мюре маракуя, сироп мигдаль Monin, сироп спайсі манго Monin, лайм фреш, сік ананас</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Pear Fizz</div><div class="item-weight">Джин Larios 12, пюре груша Monin, фреш лимон, газована вода</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Mojito</div><div class="item-weight">Ром Angostura Reserva, цукровий сироп, лайм, м'ята, газована вода</div></div><div class="item-price">220</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Christmas Vibe</div><div class="item-weight">Молоко, какао, джин Larios 12, бузиновий кордіал, кордіал лимонного мирту, цукровий сироп</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Hot Buttered Rum</div><div class="item-weight">Вершкове масло, мед, тростинний цукор, ром Especia, персиковий лікер Volare, гаряча вода</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Love Is...</div><div class="item-weight">Білий ром, ананасовий сік, молоко, цукровий сироп, кокосове пюре</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Paradoxe</div><div class="item-weight">Золотий ром Angostura, ром Especia, свіжий сік грейпфрута, лавандовий сироп, грушеве пюре, виноградний сік</div></div><div class="item-price">250</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Best Winter</div><div class="item-weight">Вишневий сік, віскі Wild Turkey 81, Campari, сироп "Зимові спеції" Monin, кордіал лимонного мирту, цукровий сироп</div></div><div class="item-price">250</div></div></div>
+    </div>
+  </div>
+
+  <!-- HOOKAH -->
+  <div id="tab-hookah" class="category-section">
+    <div class="section-title">Кальян</div>
+    <div class="menu-grid">
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кальян класік</div><div class="item-weight">в асортименті</div></div><div class="item-price">360</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кальян без нікотину</div><div class="item-weight">в асортименті</div></div><div class="item-price">360</div></div></div>
+      <div class="menu-card-photo"><div class="photo-slot"><div class="no-photo"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>фото</div></div><div class="card-body"><div class="item-info"><div class="item-name">Кальян Електрочаша</div><div class="item-weight">в асортименті</div></div><div class="item-price">360</div></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="item-modal" class="modal-overlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-img" src="" alt="">
+        <h2 class="modal-name"></h2>
+        <p class="modal-desc"></p>
+    </div>
+</div>
+
